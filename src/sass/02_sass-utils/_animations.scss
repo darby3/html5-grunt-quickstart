@@ -1,0 +1,34 @@
+/*================================================
+=            Animations and Keyframes            =
+================================================*/
+
+// Simple blur-fade-slight-bounce animation.
+
+@keyframes blurFadeIn {
+  0% {
+    opacity: 0;
+    text-shadow: 0px 0px 40px #fff;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 0.25;
+    text-shadow: 0px 0px 10px #fff;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0px 0px 1px #fff;
+    transform: scale(1);
+  }
+}
+
+// 3-d rotation animation?
+
+@keyframes slightRot {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

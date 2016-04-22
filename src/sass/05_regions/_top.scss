@@ -1,0 +1,11 @@
+/*===================================
+=            Region: Top            =
+===================================*/
+
+.topRegion {
+  background: rgba($gray, 0.9);
+
+  .region__contents {
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,128 @@
+/*=========================================
+=            Wireframe Styling            =
+=========================================*/
+
+//
+// Basically we want something like:
+//
+// - a region
+//   - with containers in it
+//     - these can have sub-containers
+//     
+//
+
+//
+// Basic layout
+//
+
+.wireframe__region {
+  /* Flex */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+
+  // add a little basic responsive styling
+  @media screen and (min-width: 700px) {
+    flex-flow: row nowrap;
+  }
+
+  &.__column {
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  margin: 0;
+  padding: 0;
+  // border: 1px dotted #00ff00;
+  // border: 1px solid #000000;
+}
+
+.wireframe__container {
+  // Let's just flex everything across for now
+  flex: 1;
+
+  // And if there's multiple bits in here let's default to flexing them as well
+  /* Flex */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  // add a little basic responsive styling
+  @media screen and (min-width: 700px) {
+    flex-flow: row nowrap;
+  }
+
+  // Unless we actually want this to be a column...then we make it a column
+
+  &.__column {
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  // And then we make each a nice box
+  margin: 1em;
+  padding: 1em;
+  border: 1px dotted #0000ff;
+
+  // and just to keep everything inside the containers balanced, for now...
+
+  & > * {
+    flex: 1;
+  }
+}
+
+//
+// Navigation fix
+//
+
+.wireframe__navigation {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    /* Flex */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+
+  li {
+    flex: 1;
+    padding: .25em;
+    border: 1px dotted #000099;
+  }
+}
+
+//
+// Basic fixed top bar - this needs a lot of work!
+//
+
+.fixedTop {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
+
+//
+// Basic color blocking
+//
+
+.colorBlocking {
+
+  #footer {
+    background: darken($gray, 20%);
+  }
+  .reverseText {
+    h1, h2, h3, h4,
+    p,
+    a {
+      color: #ffffff;
+    }
+  }
+}

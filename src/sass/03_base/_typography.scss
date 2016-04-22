@@ -1,0 +1,270 @@
+/*========================================
+=            Typography Rules            =
+========================================*/
+
+//
+// Responsive typography. 
+// Start with 100% on the html element (device standard reading size).
+// Adjust with ems.
+//
+// Ref: http://www.slideshare.net/clarissapeterson/responsive-typography-27460071
+// Ref: http://www.clarissapeterson.com/
+// 
+
+// Start with base size of 100% on the HTML element 
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: $font-body;
+}
+
+//
+// Transitions.
+//
+// Basically set a level playing field for when type sizes change. 
+// Let them flow into the new size.
+//
+// This...got to be a bit much.
+// 
+
+// p, h1, h2, h3, h4, h5, h6 {
+//   transition: all $site-transition-timing-slow ease-out;
+// }
+
+//
+// Type sizing
+// 
+
+// Headlines
+
+h1, h2, h3, h4, h5, h6, form legend {
+  font-family: $font-headers;
+  color: $headercolor;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1;
+  @media screen and (min-width: 36em) { // Media Query: Minimum
+    font-size: 1.75em;
+    line-height: 1.2;
+  }
+  @media screen and (min-width: 54em) { // Media Query: Minimum
+    font-size: 2em;
+  }
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.25em;
+  line-height: 1;
+  @media screen and (min-width: 36em) { // Media Query: Minimum
+    font-size: 1.5em;
+    line-height: 1.2;
+  }
+  @media screen and (min-width: 54em) { // Media Query: Minimum
+    line-height: 1.4;
+  }
+}
+
+h3 {
+  font-size: 1em;
+  line-height: 1;
+  font-weight: 400;
+  @media screen and (min-width: 36em) { // Media Query: Minimum
+    font-size: 1.17em;
+  }
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 400;
+  font-style: italic;
+}
+
+// Aside block headlines 
+
+.asideblock {
+  h1, h2, h3, h4, h5, h6 {
+    color: #666;
+    text-shadow: 2px 2px 3px rgba(#666, 0.4);
+  }
+}
+
+// Body copy 
+
+p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin: .5em 0;
+  @media screen and (min-width: 29em) { // Media Query: Minimum
+    margin: .75em 0;
+    font-size: 1.2em;
+    line-height: 1.5;
+  }
+  @media screen and (min-width: 30em) { // Media Query: Minimum
+    font-size: 1.4em;
+    line-height: 1.5;
+  }
+  @media screen and (min-width: 45em) { // Media Query: Minimum
+    font-size: 1.6em;
+    line-height: 1.5;
+    margin: 1em 0;
+  }
+}
+
+// Links
+
+nav a {
+  font-family: $font-navigation;
+  text-decoration: none;
+  font-weight: 700;
+  color: $themeColor5;
+  transition: color 0.15s ease-out;
+
+  &:visited {
+    color: $themeColor5;
+  }
+
+  &:hover {
+    color: lighten($themeColor2, 20%);
+  }
+
+  &:active {
+    color: $themeColor1;
+  }
+}
+
+a {
+  text-decoration: none;
+  font-weight: 400;
+  color: $themeColor5;
+  transition: color 0.15s ease-out;
+
+  &:visited {
+    color: $themeColor5;
+  }
+
+  &:hover {
+    color: lighten($themeColor2, 20%);
+  }
+
+  &:active {
+    color: $themeColor1;
+  }
+}
+
+//
+// Form typography.
+// Form element fonts, sizes, some spacing.
+// 
+
+input[type="text"],
+input[type="email"],
+input[type="submit"],
+textarea,
+select,
+legend,
+label {
+  transition: all $site-transition-timing-fast ease-in-out;
+}
+
+legend {
+  // font-family: $font-headers;
+  font-size: 1em;
+  line-height: 1;
+  @media screen and (min-width: 36em) { // Media Query: Minimum
+    font-size: 1.5em;
+  }
+  font-style: normal;
+  font-weight: 900;
+  color: #fff;
+}
+
+label {
+  font-size: 1em;
+  line-height: 1;
+  @media screen and (min-width: 42em) { // Media Query: Minimum
+    font-size: 1.1em;
+  }
+  margin: 0;
+  padding: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"],
+textarea,
+select {
+  font-size: 1em;
+  line-height: 1.5;
+  font-weight: 700;
+  @media screen and (min-width: 32em) { // Media Query: Minimum
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+  @media screen and (min-width: 50em) { // Media Query: Minimum
+    font-size: 1.2em;
+    line-height: 1.5;
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"],
+select {
+  padding: .25em;
+  @media screen and (min-width: 32em) { // Media Query: Minimum
+    padding: .25em .5em;
+  }
+}
+
+textarea {
+  // Needs just a bit more padding at responsive sizes
+  padding: .25em;
+  @media screen and (min-width: 32em) { // Media Query: Minimum
+    padding: .5em;
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"],
+textarea {
+  background-color: lighten($themeColor3, 25%);
+  color: #000;
+
+  &:focus {
+    background-color: #fff;
+    color: $headercolor;
+  }
+}
+
+input[type="submit"] {
+  font-weight: 700;
+}
+
+input[type="submit"]:hover {
+  color: rgba($headercolor, 0.95);
+  background: #fff;
+}
+
+select {
+  background-color: lighten($themeColor3, 25%);
+  color: #000;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"],
+textarea,
+select {
+  &:disabled {
+    background-color: #878787;
+    color: #000000;
+  }
+}

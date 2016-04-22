@@ -1,0 +1,89 @@
+/*=================================================
+=            Region: Instagram Contest            =
+=================================================*/
+
+
+
+.instagramRegion {
+  background-color: lighten($themeColor2, 20%);
+  background-image: linear-gradient(0deg, transparent 50%, rgba(255, 255, 255, 0.025) 50%);
+  background-size: 50px 50px;
+
+
+  border-top: 2px solid $themeColor5;
+
+  padding: 6em 1em;
+
+  .region__contents {
+    max-width: 1200px;
+    justify-content: center;
+
+    @media screen and (min-width : 40em) {
+      flex-flow: row nowrap;
+
+      > * {
+        flex: 1;
+      }
+
+
+    } 
+  }
+}
+
+.instagramRegion__header {
+
+  margin-right: 3em;
+  color: #ffffff;
+
+  h2 {
+    font-size: 2em;
+    line-height: 1;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ffffff;
+
+    color: #ffffff;
+
+    @media screen and (min-width: 40em) {
+      font-size: 2.5em;
+    }
+
+    @media screen and (min-width: 60em) {
+      font-size: 3em;
+    }
+  }
+}
+
+
+.instagramRegion__gallery {
+
+  max-width: 50%;
+  max-height: 50vh;
+  overflow: scroll;
+
+              /* Flex */
+          display: flex;
+        flex-flow: row wrap;
+  justify-content: space-around;
+      align-items: stretch;
+
+      .image {
+        flex-grow: 0;
+        flex-shrink: 1;
+        width: 24%;
+
+        // background: $themeColor3;
+
+
+
+                    /* Flex */
+                display: flex;
+              flex-flow: row nowrap;
+        justify-content: center;
+            align-items: center;
+
+        img {
+          max-width: 95%;
+          display: block;
+        }
+      }
+}

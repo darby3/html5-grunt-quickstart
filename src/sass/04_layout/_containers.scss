@@ -1,0 +1,32 @@
+/*==========================================
+=            Layout: Containers            =
+==========================================*/
+
+.container--flex {
+  // And if there's multiple bits in here let's default to flexing them as well
+  /* Flex */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  // add a little basic responsive styling
+  @media screen and (min-width: 700px) {
+    flex-flow: row nowrap;
+  }
+
+  // Unless we actually want this to be a column...then we make it a column
+  &.__column {
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  // And then we make each a nice box
+  margin: 0em;
+  padding: 0em;
+
+  // and just to keep everything inside the containers balanced, for now...
+  & > * {
+    flex: 1;
+  }
+}

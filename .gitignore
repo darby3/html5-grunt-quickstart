@@ -1,0 +1,7 @@
+node_modules
+dist
+dist*
+temp
+src/css
+src/js/scripts.js
+src/js/scripts.js.map

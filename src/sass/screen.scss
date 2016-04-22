@@ -1,0 +1,92 @@
+//
+// MAIN FILE
+//
+// Via: http://sass-guidelin.es/#main-file
+//
+// The main file (usually labelled main.scss) should be the only Sass file from
+// the whole code base not to begin with an underscore. This file should not
+// contain anything but @import and comments.
+//
+// Files should be imported according to the folder they live in, one after the
+// other in the following order:
+//
+// vendors/
+// sass-utils/
+// base/
+// layout/
+// regions/
+// components/
+// pages/
+// themes/
+//
+
+//
+// VENDORS
+// vendors/
+//
+
+@import "01_vendors/normalize";
+
+//
+// SASS-UTILS
+// sass-utils/
+//
+
+@import "02_sass-utils/variables";
+@import "02_sass-utils/mixins";
+@import "02_sass-utils/animations";
+
+//
+// BASE
+// base/
+//
+
+@import "03_base/typography";
+@import "03_base/utils";
+@import "03_base/wireframe";
+
+//
+// LAYOUT
+// layout/
+//
+
+@import "04_layout/page";
+@import "04_layout/regions";
+@import "04_layout/containers";
+
+//
+// REGIONS
+// regions/
+//
+
+@import "05_regions/top";
+@import "05_regions/main";
+@import "05_regions/footer";
+
+//
+// COMPONENTS
+// components/
+//
+
+// @import "06_components/component";
+
+//
+// PAGES
+// pages/
+//
+
+// @import "07_pages/page";
+
+//
+// STARTER
+// starter/
+//
+
+@import "98_starter/starter";
+
+//
+// SHAME
+// shame/
+//
+
+@import "99_SHAME/NOIDEA";
