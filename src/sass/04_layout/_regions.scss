@@ -2,6 +2,15 @@
 =            Layout: Regions            =
 =======================================*/
 
+//
+// This all sort of started out as a general framework. Then it became
+// increasingly customized to the needs of specific projects. Now I'm rather
+// tempted to suggest it should just be a suggested source starter file that can
+// be removed or added in as needed based on the actual content of the document.
+// Basically stop trying to save time by going hands-off and start saving time
+// by going hands-on and not trying to reapply old thinking to each new project.
+// 
+
 .region {
   margin: 0;
   padding: 0;
