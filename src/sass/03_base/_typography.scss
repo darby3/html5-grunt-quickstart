@@ -3,15 +3,15 @@
 ========================================*/
 
 //
-// Responsive typography. 
+// Responsive typography.
 // Start with 100% on the html element (device standard reading size).
 // Adjust with ems.
 //
 // Ref: http://www.slideshare.net/clarissapeterson/responsive-typography-27460071
 // Ref: http://www.clarissapeterson.com/
-// 
+//
 
-// Start with base size of 100% on the HTML element 
+// Start with base size of 100% on the HTML element
 
 html {
   font-size: 100%;
@@ -24,11 +24,11 @@ body {
 //
 // Transitions.
 //
-// Basically set a level playing field for when type sizes change. 
+// Basically set a level playing field for when type sizes change.
 // Let them flow into the new size.
 //
 // This...got to be a bit much.
-// 
+//
 
 // p, h1, h2, h3, h4, h5, h6 {
 //   transition: all $site-transition-timing-slow ease-out;
@@ -36,7 +36,7 @@ body {
 
 //
 // Type sizing
-// 
+//
 
 // Headlines
 
@@ -86,7 +86,7 @@ h4 {
   font-style: italic;
 }
 
-// Aside block headlines 
+// Aside block headlines
 
 .asideblock {
   h1, h2, h3, h4, h5, h6 {
@@ -95,7 +95,7 @@ h4 {
   }
 }
 
-// Body copy 
+// Body copy
 
 p {
   font-size: 1em;
@@ -123,45 +123,45 @@ nav a {
   font-family: $font-navigation;
   text-decoration: none;
   font-weight: 700;
-  color: $themeColor5;
+  color: $logray;
   transition: color 0.15s ease-out;
 
   &:visited {
-    color: $themeColor5;
+    color: $logray;
   }
 
   &:hover {
-    color: lighten($themeColor2, 20%);
+    color: lighten($logray, 20%);
   }
 
   &:active {
-    color: $themeColor1;
+    color: $logray;
   }
 }
 
 a {
   text-decoration: none;
   font-weight: 400;
-  color: $themeColor5;
+  color: $logray;
   transition: color 0.15s ease-out;
 
   &:visited {
-    color: $themeColor5;
+    color: $logray;
   }
 
   &:hover {
-    color: lighten($themeColor2, 20%);
+    color: lighten($logray, 20%);
   }
 
   &:active {
-    color: $themeColor1;
+    color: $logray;
   }
 }
 
 //
 // Form typography.
 // Form element fonts, sizes, some spacing.
-// 
+//
 
 input[type="text"],
 input[type="email"],
@@ -235,7 +235,7 @@ input[type="text"],
 input[type="email"],
 input[type="submit"],
 textarea {
-  background-color: lighten($themeColor3, 25%);
+  background-color: lighten($logray, 25%);
   color: #000;
 
   &:focus {
@@ -254,7 +254,7 @@ input[type="submit"]:hover {
 }
 
 select {
-  background-color: lighten($themeColor3, 25%);
+  background-color: lighten($logray, 25%);
   color: #000;
 }
 

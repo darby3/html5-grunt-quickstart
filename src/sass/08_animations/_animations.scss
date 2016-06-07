@@ -1,0 +1,21 @@
+/*==================================
+=            Animations            =
+==================================*/
+
+// This file covers anything that relates to amimation. So if animation has an
+// effect on layout we can bury it in here, and know that if the browser doesn't
+// support it, we'll naturally fall back to the original column layout. This
+// relies on the modernizr check for animation/transition support, so we also
+// know that we have JS support. Of course if something goes wrong between the
+// modernizr call and the JS animation scripts, we're in trouble, but there's
+// not much to be done about that, I think.
+
+// TODO: divide out animations from transitions?
+//
+// TODO: clean this file down some, remove keyframe definitions we don't use
+
+.cssanimations {
+
+
+
+}

@@ -4,7 +4,12 @@
   document.addEventListener('DOMContentLoaded', function() {
 
     // Let's get this party started.
-    console.log("hello let us begin"); 
+    console.log("hello let us begin");
+
+    // Requires and module initializations
+
+    var hiThere = require("./modules/helloThere");
+    hiThere();
 
     /**
      *
@@ -44,11 +49,11 @@
     }
 
 
-    // 
-    // 
+    //
+    //
     // page custom code can start going here
-    // 
-    // 
+    //
+    //
 
 
 

@@ -1,6 +1,41 @@
 module.exports = function(grunt) {
+
+  // TODO: Comment this function.
+
+  var getNewDateString = function() {
+    curDate = new Date();
+    curYear = "16";
+    curMonth = curDate.getMonth() + 1;
+    curDay = curDate.getDate();
+    curHours = curDate.getHours();
+    curMinutes = curDate.getMinutes();
+
+    dateString = "dist-";
+
+    dateString += (curMonth <= 9) ? "0" + curMonth.toString() : (curMonth).toString();
+    dateString += (curDay <= 9) ? "0" + curDay.toString() : (curDay).toString();
+
+    dateString += curYear;
+    dateString += "_";
+
+    dateString += (curHours <= 9) ? "0" + curHours.toString() : (curHours).toString();
+    dateString += (curMinutes <= 9) ? "0" + curMinutes.toString() : (curMinutes).toString();
+
+    return dateString;
+  };
+
+
+  console.log("Current distribution folder:", getNewDateString());
+
+
+  // TODO: Document this initialization call.
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    dirs: {
+        output: getNewDateString()
+    },
 
     sass: {
       dev: {
@@ -40,7 +75,7 @@ module.exports = function(grunt) {
           ]
         },
         src: 'src/temp/screen.pre.css',
-        dest: 'dist/css/screen.css'
+        dest: 'dist/<%= dirs.output %>/css/screen.css'
       },
     },
 
@@ -51,7 +86,7 @@ module.exports = function(grunt) {
       dev: {
         src: [
           'src/js/plugins/plugins.js',
-          'src/js/main.js',
+          'src/temp/main-bundled.js',
         ],
         dest: 'src/js/scripts.js'
       },
@@ -60,13 +95,23 @@ module.exports = function(grunt) {
           'src/js/plugins/plugins.js',
           'src/temp/main-clean-ugly.js',
         ],
-        dest: 'dist/js/scripts.js'
+        dest: 'dist/<%= dirs.output %>/js/scripts.js'
       }
+    },
+
+    browserify: {
+      options: {
+        sourceMap: true,
+      },
+      dev: {
+        src: 'src/js/app.js',
+        dest: 'src/temp/main-bundled.js'
+      },
     },
 
     removelogging: {
       dist: {
-        src: "src/js/main.js",
+        src: "src/temp/main-bundled.js",
         dest: "src/temp/main-clean.js"
       },
     },
@@ -88,9 +133,10 @@ module.exports = function(grunt) {
 
     jshint: {
       options: {
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        force: true,
       },
-      dev: ['Gruntfile.js', './src/js/main.js'],
+      dev: ['Gruntfile.js', './src/js/app.js', './src/js/modules/*'],
     },
 
     htmlmin: {                                     // Task
@@ -98,13 +144,13 @@ module.exports = function(grunt) {
         options: {                                 // Target options
           removeComments: true,
           collapseWhitespace: true,
-          conservativeCollapse: true, 
+          conservativeCollapse: true,
           preserveLineBreaks: true,
           removeScriptTypeAttributes: true,
           removeStyleLinkTypeAttributes: true,
         },
-        files: {                                    // Dictionary of files
-          'dist/index.html': 'dist/index.html',     // 'destination': 'source'
+        files: {                                   // Dictionary of files
+          'dist/<%= dirs.output %>/index.html': 'dist/<%= dirs.output %>/index.html',     // 'destination': 'source'
         }
       },
     },
@@ -113,34 +159,42 @@ module.exports = function(grunt) {
       css: {
         files: [{
           src: 'src/css/screen.css',
-          dest: 'dist/css/screen.css',
+          dest: 'dist/<%= dirs.output %>/css/screen.css',
         }],
       },
       js: {
         files: [{
           src: 'src/js/scripts.js',
-          dest: 'dist/js/scripts.js',
+          dest: 'dist/<%= dirs.output %>/js/scripts.js',
         }],
       },
       jsvendor: {
         expand: true,
         cwd: 'src/js/vendor',
         src: '**',
-        dest: 'dist/js/vendor',
+        dest: 'dist/<%= dirs.output %>/js/vendor',
       },
       html: {
         src: 'src/index.html',
-        dest: 'dist/index.html',
-      }
+        dest: 'dist/<%= dirs.output %>/index.html',
+      },
+      imgs: {
+        expand: true,
+        cwd: 'src/',
+        src: 'img/**/*',
+        dest: 'dist/<%= dirs.output %>/',
+        flatten: false,
+        filter: 'isFile',
+      },
     },
 
-    imagemin: {                              // Task
-      dynamic: {                             // Another target
+    imagemin: {                          // Task
+      dynamic: {                         // Another target
         files: [{
-          expand: true,                      // Enable dynamic expansion
-          cwd: 'src/',                       // Src matches are relative to this path
+          expand: true,                  // Enable dynamic expansion
+          cwd: 'src/',                   // Src matches are relative to this path
           src: ['**/*.{png,jpg,gif,JPG}'],   // Actual patterns to match
-          dest: 'dist/'                      // Destination path prefix
+          dest: 'dist/<%= dirs.output %>/'                  // Destination path prefix
         }]
       }
     },
@@ -159,13 +213,13 @@ module.exports = function(grunt) {
       }
     },
 
-    // Basically the watch task is JUST for the dev folder. 
+    // Basically the watch task is JUST for the dev folder.
     // Run a separate prod task to copy everything over to prod, minify, etc.
 
     watch: {
       scripts: { // sort this out...basically need to do my own stuff then concat it and copy it to dist...
         files: ['src/**/*.js'],
-        tasks: ['concat:dev', 'jshint:dev'],
+        tasks: ['browserify:dev', 'concat:dev', 'jshint:dev'],
         options: {
           spawn: false,
         },
@@ -173,13 +227,6 @@ module.exports = function(grunt) {
       styles: {
         files: ['src/sass/**.scss', 'src/sass/**/*.scss'],
         tasks: ['sass:dev', 'postcss:dev'],
-        options: {
-          spawn: false,
-        },
-      },
-      images: {
-        files: ['src/img/*.{png,jpg,gif,JPG}', 'src/img/**/*.{png,jpg,gif,JPG}'],
-        tasks: ['newer:imagemin'],
         options: {
           spawn: false,
         },
@@ -194,25 +241,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('compressimages', ['newer:imagemin']);
 
-  grunt.registerTask('devPrep', [
-    'concat:dev', 
-    'sass:dev',
-    'postcss:dev',
-    'newer:imagemin',
-    'express',
-    'watch'
-  ]);
+  grunt.registerTask('devPrep', ['browserify:dev', 'concat:dev', 'sass:dev', 'postcss:dev', 'express', 'watch']);
 
-  grunt.registerTask('prodReady', [
-    'sass:dev'
-    'postcss:prod'
-    'removelogging:dist'
-    'uglify:prod'
-    'concat:prod'
-    'copy:html'
-    'newer:copy:jsvendor'
-    'htmlmin:dist'
-    'newer:imagemin'
-  ]);
+  grunt.registerTask('prodReady', ['sass:dev', 'postcss:prod', 'removelogging:dist', 'uglify:prod', 'concat:prod', 'copy:html', 'htmlmin:dist', 'copy:imgs', 'copy:jsvendor']);
 
 };

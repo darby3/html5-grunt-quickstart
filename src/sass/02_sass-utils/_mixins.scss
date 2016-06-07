@@ -9,14 +9,14 @@
 // $a - background color
 // $b -> $c - main gradient
 // $d -> $e - hover gradient
-// 
+//
 
 
 @mixin css3-basic-button($a, $b, $c, $d, $e) {
   background: $a;
   background-image: linear-gradient(to bottom, $b, $c);
   border-radius: 16px;
-  color: $themeColor1;
+  color: $logray;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
@@ -36,6 +36,6 @@
     background: $d;
     background-image: linear-gradient(to bottom, $d, $e);
     text-decoration: none;
-    color: $themeColor2;
+    color: $logray;
   }
 }

@@ -6,39 +6,23 @@
 // Colors
 //
 
-// Oberlin Colors PS set
-
-$redPS:          #ed1c24;
-$orangePS:       #f47920;
-$lightOrangePS:  #fcaf17;
-$yellowPS:       #ffdd00;
-$greenPS:        #a6ce39;
-$bluePS:         #00aeef;
-$blueAltPS:      #00b9f2;
-$magentaPS:      #ee3d96;
+// TODO: Put a healthy starter set of colors in here.
 
 // Basic colors
 
-$obGray:         #323232;
-$gray:           #888888;
+$logray:         #323232;
+$midgray:        #888888;
 $white:          #ffffff;
 $black:          #000000;
 
-// From: https://color.adobe.com/librarydoorsblur-color-theme-7482181/
-
-$themeColor1: #82A88F;
-$themeColor2: #485947;
-$themeColor3: #F4EBDC;
-$themeColor4: #D9C9BA;
-$themeColor5: #8A362B;
 
 // Assign some of these colors to some common variables
 
-// $headercolor:       $themeColor2;
-// $headercolorLight:  $themeColor3;
+$headercolor:       $logray;
+$headercolorLight:  $logray;
 
-// $bodycolor:         $themeColor1;
-// $bodycolorLight:    $themeColor4;  
+$bodycolor:         $logray;
+$bodycolorLight:    $logray;
 
 
 //
@@ -47,8 +31,8 @@ $themeColor5: #8A362B;
 // Font sizing
 // Font stacks
 // Font variables
-// 
- 
+//
+
 
 $base-font-size:   1em; // The font size set on the root html element.
 $base-line-height: 1.3; // This line-height determines the basic unit of vertical rhythm.
@@ -68,9 +52,9 @@ $system-mono-font-family:    "Courier New", "DejaVu Sans Mono", monospace, sans-
 
 // Derive body, header, nav, other font families here
 
-// $body-font-family:    
-// $header-font-family:  
-// $nav-font-family:  
+// $body-font-family:
+// $header-font-family:
+// $nav-font-family:
 
 
 // Assign the font stacks
@@ -86,7 +70,7 @@ $font-monospace:   $system-sans-font-family;
 //
 // Misc
 //
- 
+
 // The amount lists, blockquotes and comments are indented.
 $indent-amount: 30px;
 

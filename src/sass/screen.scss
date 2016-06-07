@@ -22,23 +22,20 @@
 
 //
 // VENDORS
-// vendors/
 //
 
 @import "01_vendors/normalize";
 
 //
 // SASS-UTILS
-// sass-utils/
 //
 
 @import "02_sass-utils/variables";
 @import "02_sass-utils/mixins";
-@import "02_sass-utils/animations";
+@import "02_sass-utils/keyframes";
 
 //
 // BASE
-// base/
 //
 
 @import "03_base/typography";
@@ -47,7 +44,6 @@
 
 //
 // LAYOUT
-// layout/
 //
 
 @import "04_layout/page";
@@ -56,7 +52,6 @@
 
 //
 // REGIONS
-// regions/
 //
 
 @import "05_regions/top";
@@ -65,17 +60,21 @@
 
 //
 // COMPONENTS
-// components/
 //
 
-// @import "06_components/component";
+@import "06_components/component";
 
 //
 // PAGES
-// pages/
 //
 
 // @import "07_pages/page";
+
+//
+// ANIMATION
+//
+
+@import "08_animations/animations";
 
 //
 // STARTER
