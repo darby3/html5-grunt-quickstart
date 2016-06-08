@@ -102,6 +102,9 @@ module.exports = function(grunt) {
     browserify: {
       options: {
         sourceMap: true,
+        transform: [
+          ["babelify", { "presets": ["es2015"] }]
+        ]
       },
       dev: {
         src: 'src/js/app.js',
