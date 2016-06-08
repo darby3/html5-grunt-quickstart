@@ -102,6 +102,11 @@ module.exports = function(grunt) {
     browserify: {
       options: {
         sourceMap: true,
+        transform: [
+          ["babelify", {
+             loose: "all"
+          }]
+        ]
       },
       dev: {
         src: 'src/js/app.js',
