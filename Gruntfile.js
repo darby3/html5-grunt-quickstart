@@ -25,6 +25,7 @@ module.exports = function(grunt) {
   };
 
 
+  console.log("==================================================");
   console.log("Current distribution folder:", getNewDateString());
 
 
@@ -47,6 +48,15 @@ module.exports = function(grunt) {
           'src/temp/screen.pre.css': 'src/sass/screen.scss'
         }
       },
+      prod: {
+        options: {
+          sourceMap: false,
+          style: 'expanded'
+        },
+        files: {
+          'src/temp/screen.pre.prod.css': 'src/sass/screen.scss'
+        }
+      },
     },
 
     postcss: {
@@ -55,7 +65,7 @@ module.exports = function(grunt) {
         options: {
           map: true,
           processors: [
-            require('autoprefixer-core')({
+            require('autoprefixer')({
               browsers: ['last 4 versions']
             }),
           ]
@@ -68,13 +78,13 @@ module.exports = function(grunt) {
         options: {
           map: false,
           processors: [
-            require('autoprefixer-core')({
+            require('autoprefixer')({
               browsers: ['last 4 versions']
             }),
             require('cssnano')() // minify the result
           ]
         },
-        src: 'src/temp/screen.pre.css',
+        src: 'src/temp/screen.pre.prod.css',
         dest: 'dist/<%= dirs.output %>/css/screen.css'
       },
     },
@@ -246,6 +256,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('devPrep', ['browserify:dev', 'concat:dev', 'sass:dev', 'postcss:dev', 'express', 'watch']);
 
-  grunt.registerTask('prodReady', ['sass:dev', 'postcss:prod', 'removelogging:dist', 'uglify:prod', 'concat:prod', 'copy:html', 'htmlmin:dist', 'copy:imgs', 'copy:jsvendor']);
+  grunt.registerTask('prodReady', ['sass:prod', 'postcss:prod', 'removelogging:dist', 'uglify:prod', 'concat:prod', 'copy:html', 'htmlmin:dist', 'copy:imgs', 'copy:jsvendor']);
 
 };
