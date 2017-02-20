@@ -4,18 +4,21 @@ module.exports = function(grunt) {
 
   var getNewDateString = function() {
     curDate = new Date();
-    curYear = "16";
+    curYear = "2017";
     curMonth = curDate.getMonth() + 1;
     curDay = curDate.getDate();
     curHours = curDate.getHours();
     curMinutes = curDate.getMinutes();
 
-    dateString = "dist-";
-
-    dateString += (curMonth <= 9) ? "0" + curMonth.toString() : (curMonth).toString();
-    dateString += (curDay <= 9) ? "0" + curDay.toString() : (curDay).toString();
+    dateString = "dist--";
 
     dateString += curYear;
+    dateString += "-";
+
+    dateString += (curMonth <= 9) ? "0" + curMonth.toString() : (curMonth).toString();
+    dateString += "-";
+    dateString += (curDay <= 9) ? "0" + curDay.toString() : (curDay).toString();
+
     dateString += "_";
 
     dateString += (curHours <= 9) ? "0" + curHours.toString() : (curHours).toString();
