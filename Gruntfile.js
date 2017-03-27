@@ -16,6 +16,10 @@ module.exports = function(grunt) {
      *
      */
 
+    clean: {
+      output_html: ['src/output/**/*.html']
+    },
+
     assemble: {
       options: {
         layoutdir: './src/hbs/wrapper',
@@ -268,7 +272,7 @@ module.exports = function(grunt) {
       },
       pages: {
         files: ['src/hbs/**/*.hbs', 'src/hbs/*.hbs'],
-        tasks: ['assemble:site'],
+        tasks: ['clean:output_html', 'assemble:site'],
         options: {
           spawn: false,
         },
