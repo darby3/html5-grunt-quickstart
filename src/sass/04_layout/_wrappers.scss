@@ -1,0 +1,48 @@
+/*=======================================
+=            Layout Wrappers            =
+=======================================*/
+
+//
+// Wrapper classes are cool. You can tuck them as deep into the HTML as needed
+// to handle setting horizontal widths. Everything above that level can assume a
+// width of 100%, which can be useful for various effects. Everything from
+// wrapper down can assume safe widths and properly aligned margins.
+//
+
+.wrapper {
+  margin-right: auto;
+  margin-left: auto;
+
+  width: calc(100% - #{$min-outer-margin} - #{$min-outer-margin});
+  max-width: $menu-large;
+}
+
+//
+// A wrapper to basically center the text no matter what (because we're not
+// going to be pulling anything out of it)
+//
+
+.wrapper--center {
+  @extend .wrapper;
+}
+
+//
+// "Wide" content wrappers. Wide images hit the window edges below max width.
+//
+
+.wrapper--wide {
+  @extend .wrapper;
+
+  max-width: calc(#{$menu-mega} + #{$min-inner-gutter});
+}
+
+.wrapper--wideImage {
+  @extend .wrapper--wide;
+
+  width: 100%;
+  
+          display: flex;
+        flex-flow: column nowrap;
+  justify-content: center;
+      align-items: center;
+}
