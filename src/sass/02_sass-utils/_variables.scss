@@ -26,6 +26,45 @@ $bodycolorLight:    $logray;
 
 
 //
+// Some breakpoints
+//
+
+// Navigation breakpoints
+
+$menu-small: 0px;
+$menu-medium: 420px;
+$menu-large: 760px;
+$menu-extralarge: 920px;
+$menu-mega: 1200px;
+
+//
+// Some layout-related variables
+//
+
+$side-by-side-gutter--small: 1.5em;
+$side-by-side-gutter--large: 3em;
+
+// outer margins
+$min-outer-margin: 2em;
+$min-outer-margin-more: 4em;
+
+// inner gutters
+$min-inner-gutter: 2em;
+$min-inner-gutter-more: 4em;
+
+// vertical space between
+$min-space-between: 10vh;
+$min-space-between-more: 20vh;
+
+// progress bar space
+$min-progress-bar-width: 2em;
+$min-progress-bar-width-more: 4em;
+
+// main text max width
+$main-text-max-width: $menu-large;
+
+
+//
 // Typography
 //
 // Font sizing
