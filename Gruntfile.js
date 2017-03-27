@@ -10,6 +10,12 @@ module.exports = function(grunt) {
       output: getNewDateString()
     },
 
+    /**
+     *
+     * Handlebars / HTML
+     *
+     */
+
     assemble: {
       options: {
         layoutdir: './src/hbs/wrapper',
@@ -19,9 +25,31 @@ module.exports = function(grunt) {
       },
       site: {
         src: ['./src/hbs/pages/**/*.hbs'],
-        dest: './src'
+        dest: './src/output',
       }
     },
+
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          conservativeCollapse: true,
+          preserveLineBreaks: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+        },
+        files: {
+          'dist/<%= dirs.output %>/index.html': 'dist/<%= dirs.output %>/index.html',     // 'destination': 'source'
+        }
+      },
+    },
+
+    /**
+     *
+     * Sass / Styles
+     *
+     */
 
     sass: {
       dev: {
@@ -56,7 +84,7 @@ module.exports = function(grunt) {
           ]
         },
         src: 'src/temp/screen.pre.css',
-        dest: 'src/css/screen.css'
+        dest: 'src/output/css/screen.css'
       },
       // Update the prod file with minification
       prod: {
@@ -74,25 +102,11 @@ module.exports = function(grunt) {
       },
     },
 
-    concat: {
-      options: {
-        sourceMap: true,
-      },
-      dev: {
-        src: [
-          'src/js/plugins/plugins.js',
-          'src/temp/main-bundled.js',
-        ],
-        dest: 'src/js/scripts.js'
-      },
-      prod: {
-        src: [
-          'src/js/plugins/plugins.js',
-          'src/temp/main-clean-ugly.js',
-        ],
-        dest: 'dist/<%= dirs.output %>/js/scripts.js'
-      }
-    },
+    /**
+     *
+     * JS (w/ Browserify)
+     *
+     */
 
     browserify: {
       options: {
@@ -129,6 +143,26 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      options: {
+        sourceMap: true,
+      },
+      dev: {
+        src: [
+          'src/js/plugins/plugins.js',
+          'src/temp/main-bundled.js',
+        ],
+        dest: 'src/output/js/scripts.js'
+      },
+      prod: {
+        src: [
+          'src/js/plugins/plugins.js',
+          'src/temp/main-clean-ugly.js',
+        ],
+        dest: 'dist/<%= dirs.output %>/js/scripts.js'
+      }
+    },
+
     jshint: {
       options: {
         reporter: require('jshint-stylish'),
@@ -137,21 +171,11 @@ module.exports = function(grunt) {
       dev: ['Gruntfile.js', './src/js/app.js', './src/js/modules/*'],
     },
 
-    htmlmin: {                                     // Task
-      dist: {                                      // Target
-        options: {                                 // Target options
-          removeComments: true,
-          collapseWhitespace: true,
-          conservativeCollapse: true,
-          preserveLineBreaks: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-        },
-        files: {                                   // Dictionary of files
-          'dist/<%= dirs.output %>/index.html': 'dist/<%= dirs.output %>/index.html',     // 'destination': 'source'
-        }
-      },
-    },
+    /**
+     *
+     * Copy task (getting to dist)
+     *
+     */
 
     copy: {
       css: {
@@ -165,6 +189,12 @@ module.exports = function(grunt) {
           src: 'src/js/scripts.js',
           dest: 'dist/<%= dirs.output %>/js/scripts.js',
         }],
+      },
+      jsvendordev: {
+        expand: true,
+        cwd: 'src/js/vendor',
+        src: '**',
+        dest: 'dist/<%= dirs.output %>/js/vendor',
       },
       jsvendor: {
         expand: true,
@@ -186,23 +216,33 @@ module.exports = function(grunt) {
       },
     },
 
-    imagemin: {                          // Task
-      dynamic: {                         // Another target
+    /**
+     *
+     * Minify images
+     *
+     */
+
+    imagemin: {
+      dynamic: {
         files: [{
-          expand: true,                  // Enable dynamic expansion
-          cwd: 'src/',                   // Src matches are relative to this path
-          src: ['**/*.{png,jpg,gif,JPG}'],   // Actual patterns to match
-          dest: 'dist/<%= dirs.output %>/'                  // Destination path prefix
+          expand: true,
+          cwd: 'src/',
+          src: ['**/*.{png,jpg,gif,JPG}'],
+          dest: 'dist/<%= dirs.output %>/'
         }]
       }
     },
 
-    // Grunt express - our webserver
-    // https://github.com/blai/grunt-express
+    /**
+     *
+     * Express
+     *
+     */
+
     express: {
       all: {
         options: {
-          bases: ['./src'],
+          bases: ['./src/output'],
           hostname: "0.0.0.0",
           livereload: true,
           port: 1337
@@ -210,12 +250,18 @@ module.exports = function(grunt) {
       }
     },
 
-    // Basically the watch task is JUST for the dev folder.
-    // Run a separate prod task to copy everything over to prod, minify, etc.
+    /**
+     *
+     * Watch task.
+     *
+     * Basically the watch task is JUST for the dev folder.
+     * Run a separate prod task to copy everything over to prod, minify, etc.
+     *
+     */
 
     watch: {
       scripts: { // sort this out...basically need to do my own stuff then concat it and copy it to dist...
-        files: ['src/**/*.js'],
+        files: ['src/js/**/*.js'],
         tasks: ['browserify:dev', 'concat:dev', 'jshint:dev'],
         options: {
           spawn: false,
@@ -236,8 +282,13 @@ module.exports = function(grunt) {
         },
       }
     }
-
   });
+
+  /**
+   *
+   * Task set-up.
+   *
+   */
 
   require('load-grunt-tasks')(grunt);
 
@@ -266,8 +317,12 @@ module.exports = function(grunt) {
 };
 
 
-// Helper function to get a Date String for constructing distribution folders.
-// This can probably be dumped into a separate module file or something.
+/**
+ *
+ * Helper function to get a Date String for constructing distribution folders.
+ * This can probably be dumped into a separate module file or something.
+ *
+ */
 
 function getNewDateString() {
   var curDate = new Date();
