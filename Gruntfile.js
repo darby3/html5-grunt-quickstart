@@ -182,11 +182,11 @@ module.exports = function(grunt) {
           dest: 'dist/<%= dirs.output %>/js/scripts.js',
         }],
       },
-      jsvendordev: {
+      jvenddev: {
         expand: true,
         cwd: 'src/js/vendor',
         src: '**',
-        dest: 'dist/<%= dirs.output %>/js/vendor',
+        dest: 'src/output/js/vendor',
       },
       jsvendor: {
         expand: true,
@@ -252,7 +252,7 @@ module.exports = function(grunt) {
      */
 
     watch: {
-      scripts: { // sort this out...basically need to do my own stuff then concat it and copy it to dist...
+      scripts: {
         files: ['src/js/**/*.js'],
         tasks: ['browserify:dev', 'concat:dev', 'jshint:dev'],
         options: {
@@ -290,6 +290,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', ['browserify:dev',
                              'concat:dev',
+                             'copy:jvenddev',
                              'sass:dev',
                              'postcss:dev',
                              'assemble:site',
@@ -305,7 +306,6 @@ module.exports = function(grunt) {
                               'htmlmin:dist',
                               'copy:imgs',
                               'copy:jsvendor']);
-
 };
 
 
