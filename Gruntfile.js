@@ -1,44 +1,13 @@
 module.exports = function(grunt) {
 
-  // TODO: Comment this function.
-
-  var getNewDateString = function() {
-    curDate = new Date();
-    curYear = "2017";
-    curMonth = curDate.getMonth() + 1;
-    curDay = curDate.getDate();
-    curHours = curDate.getHours();
-    curMinutes = curDate.getMinutes();
-
-    dateString = "dist--";
-
-    dateString += curYear;
-    dateString += "-";
-
-    dateString += (curMonth <= 9) ? "0" + curMonth.toString() : (curMonth).toString();
-    dateString += "-";
-    dateString += (curDay <= 9) ? "0" + curDay.toString() : (curDay).toString();
-
-    dateString += "_";
-
-    dateString += (curHours <= 9) ? "0" + curHours.toString() : (curHours).toString();
-    dateString += (curMinutes <= 9) ? "0" + curMinutes.toString() : (curMinutes).toString();
-
-    return dateString;
-  };
-
-
   console.log("==================================================");
   console.log("Current distribution folder:", getNewDateString());
-
-
-  // TODO: Document this initialization call.
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     dirs: {
-        output: getNewDateString()
+      output: getNewDateString()
     },
 
     sass: {
@@ -215,7 +184,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     // Grunt express - our webserver
     // https://github.com/blai/grunt-express
     express: {
@@ -257,8 +225,47 @@ module.exports = function(grunt) {
 
   grunt.registerTask('compressimages', ['newer:imagemin']);
 
-  grunt.registerTask('devPrep', ['browserify:dev', 'concat:dev', 'sass:dev', 'postcss:dev', 'express', 'watch']);
+  grunt.registerTask('dev', ['browserify:dev',
+                             'concat:dev',
+                             'sass:dev',
+                             'postcss:dev',
+                             'express',
+                             'watch']);
 
-  grunt.registerTask('prodReady', ['sass:prod', 'postcss:prod', 'removelogging:dist', 'uglify:prod', 'concat:prod', 'copy:html', 'htmlmin:dist', 'copy:imgs', 'copy:jsvendor']);
+  grunt.registerTask('prod', ['sass:prod',
+                              'postcss:prod',
+                              'removelogging:dist',
+                              'uglify:prod',
+                              'concat:prod',
+                              'copy:html',
+                              'htmlmin:dist',
+                              'copy:imgs',
+                              'copy:jsvendor']);
 
+};
+
+
+// Helper function to get a Date String for constructing distribution folders.
+// This can probably be dumped into a separate module file or something.
+
+function getNewDateString() {
+  var curDate = new Date();
+  var curYear = curDate.getFullYear();
+  var curMonth = curDate.getMonth() + 1;
+  var curDay = curDate.getDate();
+  var curHours = curDate.getHours();
+  var curMinutes = curDate.getMinutes();
+
+  var dateString = "dist--";
+
+  dateString += curYear.toString();
+  dateString += (curMonth <= 9) ? "0" + curMonth.toString() : (curMonth).toString();
+  dateString += (curDay <= 9) ? "0" + curDay.toString() : (curDay).toString();
+
+  dateString += "_";
+
+  dateString += (curHours <= 9) ? "0" + curHours.toString() : (curHours).toString();
+  dateString += (curMinutes <= 9) ? "0" + curMinutes.toString() : (curMinutes).toString();
+
+  return dateString;
 };
