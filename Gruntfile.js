@@ -10,6 +10,19 @@ module.exports = function(grunt) {
       output: getNewDateString()
     },
 
+    assemble: {
+      options: {
+        layoutdir: './src/hbs/wrapper',
+        layout: 'main.hbs',
+        partials: ['./src/hbs/partials/**/*.hbs'],
+        flatten: true,
+      },
+      site: {
+        src: ['./src/hbs/pages/**/*.hbs'],
+        dest: './src'
+      }
+    },
+
     sass: {
       dev: {
         options: {
@@ -214,6 +227,13 @@ module.exports = function(grunt) {
         options: {
           spawn: false,
         },
+      },
+      pages: {
+        files: ['src/hbs/**/*.hbs', 'src/hbs/*.hbs'],
+        tasks: ['assemble:site'],
+        options: {
+          spawn: false,
+        },
       }
     }
 
@@ -229,6 +249,7 @@ module.exports = function(grunt) {
                              'concat:dev',
                              'sass:dev',
                              'postcss:dev',
+                             'assemble:site',
                              'express',
                              'watch']);
 
