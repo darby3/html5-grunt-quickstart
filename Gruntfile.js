@@ -132,14 +132,6 @@ module.exports = function(grunt) {
       prod: {
         src: 'src/temp/main-clean.js',
         dest: 'src/temp/main-clean-ugly.js'
-      },
-      dd3: {
-        src: 'src/js/plugins/DD3.js',
-        dest: 'src/js/plugins/DD3.min.js',
-      },
-      console: {
-        src: 'src/js/plugins/console-errors.js',
-        dest: 'src/js/plugins/console-errors.min.js',
       }
     },
 
